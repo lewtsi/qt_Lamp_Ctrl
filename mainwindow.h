@@ -25,9 +25,21 @@ public:
 private:
     Ui::MainWindow *ui;
     Win_QextSerialPort *myCom;
+    QTimer *timer;
 
 private slots:
+    void on_timeCounter_valueChanged(int );
+    void on_chkBoxRefresh_clicked();
+    void on_radio_power_clicked();
+    void on_radio_percent_clicked();
+    void on_lampSlider_sliderMoved(int position);
+    void on_lampPowerValue_valueChanged(int );
+    void on_PWMout_value_valueChanged(int );
+    void on_lampPowerMax_textChanged(QString );
+    void on_radioBtnMul_clicked();
+    void on_radioBtnSig_clicked();
     int check_uart_is_open();
+    int get_LampCtrlStyle(unsigned char opt_type, char **cmd);
     void on_BtnCloseUart_clicked();
     void on_BtnPWMin_clicked();
     void on_BtnNetTop_clicked();
@@ -38,6 +50,7 @@ private slots:
     void on_BtnOpenUart_clicked();
     void on_BtnAddUart_clicked();
     void readMyCom();
+    void timerUpdate();
 };
 
 #endif // MAINWINDOW_H

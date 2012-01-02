@@ -6,225 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>636</width>
-    <height>395</height>
+    <width>672</width>
+    <height>575</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>ATZGB路灯测试软件v0.02</string>
+   <string>ATZGB路灯测试软件v0.10</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>520</x>
-      <y>20</y>
-      <width>101</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Arial</family>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>115200-8N1</string>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="portNameComboBox">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Arial</family>
-      <pointsize>12</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <item>
-     <property name="text">
-      <string>COM1</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>COM2</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>COM3</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>COM4</string>
-     </property>
-    </item>
-   </widget>
-   <widget class="QPushButton" name="BtnAddUart">
-    <property name="geometry">
-     <rect>
-      <x>380</x>
-      <y>10</y>
-      <width>111</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>微软雅黑</family>
-      <pointsize>12</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>添加串口</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="BtnOpenUart">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>10</y>
-      <width>111</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>微软雅黑</family>
-      <pointsize>12</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string>打开串口</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="BtnLampOn">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>60</y>
-      <width>101</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>微软雅黑</family>
-      <pointsize>12</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>开灯</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="BtnLampOff">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>60</y>
-      <width>101</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>微软雅黑</family>
-      <pointsize>12</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>关灯</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="BtnPWMoutEn">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>270</x>
-      <y>60</y>
-      <width>141</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>微软雅黑</family>
-      <pointsize>12</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>输出调光信号</string>
-    </property>
-   </widget>
-   <widget class="QTextBrowser" name="textBrowser">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>160</y>
-      <width>601</width>
-      <height>191</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Arial</family>
-      <pointsize>11</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-   </widget>
-   <widget class="QLabel" name="NodeAddr">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>320</y>
-      <width>54</width>
-      <height>12</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>NodeAddr</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="PWM_dutycycle">
     <property name="enabled">
      <bool>false</bool>
@@ -232,7 +21,7 @@
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>320</y>
+      <y>400</y>
       <width>54</width>
       <height>12</height>
      </rect>
@@ -247,8 +36,8 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>320</y>
+      <x>160</x>
+      <y>400</y>
       <width>54</width>
       <height>12</height>
      </rect>
@@ -257,70 +46,1281 @@
      <string>PWM_freq</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="BtnTest">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
+   <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>0</y>
-      <width>111</width>
-      <height>21</height>
+      <x>20</x>
+      <y>140</y>
+      <width>641</width>
+      <height>71</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <family>华文新魏</family>
-      <pointsize>10</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
+    <property name="title">
+     <string/>
     </property>
-    <property name="text">
-     <string>测试串口接收</string>
-    </property>
+    <widget class="QLabel" name="label_to">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>40</y>
+       <width>31</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>To</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_from">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>40</y>
+       <width>54</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>From</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="AddrOP">
+     <property name="geometry">
+      <rect>
+       <x>250</x>
+       <y>40</y>
+       <width>61</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(170, 0, 127);</string>
+     </property>
+     <property name="inputMask">
+      <string>HHHH; </string>
+     </property>
+     <property name="text">
+      <string>AE01</string>
+     </property>
+     <property name="maxLength">
+      <number>4</number>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="AddrED">
+     <property name="geometry">
+      <rect>
+       <x>360</x>
+       <y>40</y>
+       <width>61</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(170, 0, 127);</string>
+     </property>
+     <property name="inputMask">
+      <string>HHHH; </string>
+     </property>
+     <property name="text">
+      <string>AE15</string>
+     </property>
+     <property name="maxLength">
+      <number>4</number>
+     </property>
+     <property name="frame">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioBtnMul">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>10</y>
+       <width>89</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>多灯控制</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioBtnSig">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>10</y>
+       <width>89</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>单灯控制</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="chkBox_odd">
+     <property name="geometry">
+      <rect>
+       <x>430</x>
+       <y>20</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(0, 170, 0);</string>
+     </property>
+     <property name="text">
+      <string>奇数灯</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="chkBox_even">
+     <property name="geometry">
+      <rect>
+       <x>430</x>
+       <y>40</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(0, 170, 0);</string>
+     </property>
+     <property name="text">
+      <string>偶数灯</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="dir_01">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>10</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="dir_02">
+     <property name="geometry">
+      <rect>
+       <x>560</x>
+       <y>30</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="dir_04">
+     <property name="geometry">
+      <rect>
+       <x>600</x>
+       <y>29</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="dir_03">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>50</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="dir_05">
+     <property name="geometry">
+      <rect>
+       <x>560</x>
+       <y>10</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="dir_08">
+     <property name="geometry">
+      <rect>
+       <x>600</x>
+       <y>10</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="dir_06">
+     <property name="geometry">
+      <rect>
+       <x>560</x>
+       <y>50</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="dir_07">
+     <property name="geometry">
+      <rect>
+       <x>600</x>
+       <y>50</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton_4">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>30</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>141</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>路灯最大输出功率</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lampPowerMax">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>51</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 85, 0);</string>
+     </property>
+     <property name="inputMask">
+      <string>999; </string>
+     </property>
+     <property name="text">
+      <string>150</string>
+     </property>
+     <property name="maxLength">
+      <number>3</number>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_12">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>40</y>
+       <width>16</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>瓦</string>
+     </property>
+    </widget>
+    <widget class="Line" name="line_3">
+     <property name="geometry">
+      <rect>
+       <x>153</x>
+       <y>10</y>
+       <width>20</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="lineWidth">
+      <number>2</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_13">
+     <property name="geometry">
+      <rect>
+       <x>520</x>
+       <y>20</y>
+       <width>41</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>宋体</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>方向</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_14">
+     <property name="geometry">
+      <rect>
+       <x>520</x>
+       <y>40</y>
+       <width>41</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>宋体</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>选择</string>
+     </property>
+    </widget>
    </widget>
-   <widget class="QSpinBox" name="PWMout_value">
+   <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>70</y>
-      <width>61</width>
-      <height>31</height>
+      <x>20</x>
+      <y>220</y>
+      <width>641</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QPushButton" name="BtnPWMoutEn">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>10</y>
+       <width>161</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>调整路灯输出功率</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="BtnNetTop">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>90</y>
+       <width>171</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>读取路灯网络状态</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="PWMout_value">
+     <property name="geometry">
+      <rect>
+       <x>490</x>
+       <y>41</y>
+       <width>61</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="mouseTracking">
+      <bool>false</bool>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="accelerated">
+      <bool>true</bool>
+     </property>
+     <property name="maximum">
+      <number>100</number>
+     </property>
+     <property name="value">
+      <number>100</number>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="BtnLampOff">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>171</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>关  灯</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>550</x>
+       <y>40</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>%</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="BtnPWMin">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>130</y>
+       <width>171</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>读取路灯工作状态</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="BtnLampOn">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>171</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>开  灯</string>
+     </property>
+    </widget>
+    <widget class="QLCDNumber" name="lcdTimer">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>500</x>
+       <y>140</y>
+       <width>31</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(85, 0, 255);
+background-color: rgb(255, 255, 127);</string>
+     </property>
+     <property name="digitCount">
+      <number>3</number>
+     </property>
+     <property name="segmentStyle">
+      <enum>QLCDNumber::Filled</enum>
+     </property>
+     <property name="intValue" stdset="0">
+      <number>120</number>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="chkBoxRefresh">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>140</y>
+       <width>121</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>自动刷新路灯状态</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_refresh_info">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>140</y>
+       <width>171</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>刷新间隔             秒  倒计时：</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="timeCounter">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>140</y>
+       <width>42</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="minimum">
+      <number>120</number>
+     </property>
+     <property name="maximum">
+      <number>600</number>
+     </property>
+     <property name="singleStep">
+      <number>10</number>
+     </property>
+    </widget>
+    <widget class="QSlider" name="lampSlider">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>10</y>
+       <width>161</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(0, 0, 127);
+background-color: rgb(255, 255, 127);</string>
+     </property>
+     <property name="maximum">
+      <number>100</number>
+     </property>
+     <property name="singleStep">
+      <number>1</number>
+     </property>
+     <property name="pageStep">
+      <number>10</number>
+     </property>
+     <property name="value">
+      <number>100</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="Line" name="line">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>110</y>
+       <width>441</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="Line" name="line_2">
+     <property name="geometry">
+      <rect>
+       <x>183</x>
+       <y>10</y>
+       <width>20</width>
+       <height>111</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="lampPowerValue">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>490</x>
+       <y>80</y>
+       <width>61</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="minimum">
+      <number>75</number>
+     </property>
+     <property name="maximum">
+      <number>150</number>
+     </property>
+     <property name="singleStep">
+      <number>1</number>
+     </property>
+     <property name="value">
+      <number>150</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>46</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>输出百分比</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>90</y>
+       <width>81</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>输出功率值</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>550</x>
+       <y>80</y>
+       <width>21</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>W</string>
+     </property>
+    </widget>
+    <widget class="QProgressBar" name="lampBar">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>10</y>
+       <width>51</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="value">
+      <number>100</number>
+     </property>
+     <property name="textVisible">
+      <bool>true</bool>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="textDirection">
+      <enum>QProgressBar::TopToBottom</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_15">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>60</y>
+       <width>71</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>调节方式</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radio_slider">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>60</y>
+       <width>61</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>滑动条</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radio_power">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>100</y>
+       <width>61</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>功率值</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radio_percent">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>80</y>
+       <width>61</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>百分比</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QProgressBar" name="timerBar">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>540</x>
+       <y>140</y>
+       <width>91</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="value">
+      <number>0</number>
+     </property>
+     <property name="textVisible">
+      <bool>false</bool>
+     </property>
+     <property name="invertedAppearance">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>550</x>
+       <y>140</y>
+       <width>51</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Counter:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_timerOVcnt">
+     <property name="geometry">
+      <rect>
+       <x>600</x>
+       <y>140</y>
+       <width>21</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>000</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_powerPercent">
+     <property name="geometry">
+      <rect>
+       <x>590</x>
+       <y>90</y>
+       <width>31</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>100%</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QTextBrowser" name="textBrowser">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>400</y>
+      <width>641</width>
+      <height>121</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Arial</family>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>10</y>
+      <width>201</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>串口参数</string>
+    </property>
+    <widget class="QComboBox" name="portNameComboBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <item>
+      <property name="text">
+       <string>COM1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>COM2</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>COM3</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>COM4</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QPushButton" name="BtnAddUart">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>20</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>添加串口</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="BtnCloseUart">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>80</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>关闭串口</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="BtnOpenUart">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>80</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>打开串口</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>111</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>11</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>115200 - 8N1</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QRadioButton" name="radioButton">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>51</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
       <pointsize>12</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
-    <property name="mouseTracking">
-     <bool>false</bool>
+    <property name="text">
+     <string>串口</string>
     </property>
-    <property name="layoutDirection">
-     <enum>Qt::LeftToRight</enum>
-    </property>
-    <property name="accelerated">
+    <property name="checked">
      <bool>true</bool>
     </property>
-    <property name="maximum">
-     <number>100</number>
-    </property>
    </widget>
-   <widget class="QPushButton" name="BtnNetTop">
+   <widget class="QRadioButton" name="radioButton_2">
     <property name="enabled">
      <bool>false</bool>
     </property>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>110</y>
-      <width>221</width>
-      <height>41</height>
+      <y>60</y>
+      <width>71</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="font">
@@ -332,102 +1332,288 @@
      </font>
     </property>
     <property name="text">
-     <string>读取网络拓扑</string>
+     <string>以太网</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="BtnPWMin">
+   <widget class="QGroupBox" name="groupBox_4">
     <property name="enabled">
      <bool>false</bool>
     </property>
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>110</y>
-      <width>221</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>微软雅黑</family>
-      <pointsize>12</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>读取采集数据</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="BtnCloseUart">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>250</x>
+      <x>310</x>
       <y>10</y>
-      <width>111</width>
-      <height>31</height>
+      <width>221</width>
+      <height>121</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <family>微软雅黑</family>
-      <pointsize>12</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
+    <property name="title">
+     <string>网络参数</string>
     </property>
-    <property name="text">
-     <string>关闭串口</string>
-    </property>
+    <widget class="QLineEdit" name="netPortNumb">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>50</y>
+       <width>113</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 85, 0);</string>
+     </property>
+     <property name="text">
+      <string>33211</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>50</y>
+       <width>54</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>端口号</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="netIpAddr">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>20</y>
+       <width>131</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 85, 0);</string>
+     </property>
+     <property name="text">
+      <string>211.233.223.194</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>54</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>IP地址</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnNetStart">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>80</y>
+       <width>181</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>开启TCP服务器</string>
+     </property>
+    </widget>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QRadioButton" name="radioButton_3">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>80</y>
-      <width>21</width>
-      <height>20</height>
+      <x>20</x>
+      <y>90</y>
+      <width>61</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Arial</family>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
     <property name="text">
-     <string>%</string>
+     <string>USB</string>
     </property>
    </widget>
-   <zorder>label</zorder>
-   <zorder>portNameComboBox</zorder>
-   <zorder>BtnAddUart</zorder>
-   <zorder>BtnOpenUart</zorder>
-   <zorder>BtnLampOn</zorder>
-   <zorder>BtnLampOff</zorder>
-   <zorder>BtnPWMoutEn</zorder>
-   <zorder>NodeAddr</zorder>
-   <zorder>PWM_dutycycle</zorder>
-   <zorder>PWM_freq</zorder>
-   <zorder>BtnTest</zorder>
-   <zorder>PWMout_value</zorder>
-   <zorder>BtnNetTop</zorder>
-   <zorder>BtnPWMin</zorder>
-   <zorder>BtnCloseUart</zorder>
-   <zorder>label_2</zorder>
-   <zorder>textBrowser</zorder>
+   <widget class="QGroupBox" name="groupBox_5">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>10</y>
+      <width>121</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>USB参数</string>
+    </property>
+    <widget class="QLabel" name="label_7">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>31</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>VID</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>31</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>PID</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="usbVIDvalue">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>20</y>
+       <width>61</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="usbPIDvalue">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>50</y>
+       <width>61</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnUsbConnect">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>80</y>
+       <width>101</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>连接设备</string>
+     </property>
+    </widget>
+    <zorder>label_7</zorder>
+    <zorder>label_8</zorder>
+    <zorder>usbVIDvalue</zorder>
+    <zorder>usbPIDvalue</zorder>
+    <zorder>btnUsbConnect</zorder>
+    <zorder>btnNetStart</zorder>
+   </widget>
+   <widget class="QLabel" name="NodeAddr">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>400</y>
+      <width>54</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>NodeAddr</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>636</width>
+     <width>672</width>
      <height>23</height>
     </rect>
    </property>

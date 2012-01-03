@@ -26,7 +26,7 @@ void MainWindow::on_BtnAddUart_clicked()
     portname = QInputDialog::getText(this, tr("添加串口"), tr("设备文件名"), QLineEdit::Normal, 0, &ok);
     if(ok && !portname.isEmpty()){
         ui->portNameComboBox->addItem(portname);
-        ui->statusBar->showMessage(tr("添加串口成功"));
+        ui->statusBar->showMessage(tr("添加串口成功，请选择端口号，并打开串口"));
         //ui->portNameComboBox->currentText(portname);
     }
 }
@@ -72,6 +72,7 @@ void MainWindow::on_BtnOpenUart_clicked()
     ui->BtnOpenUart->setPalette(pal);
     QFont serifFont("宋体", 9, QFont::Bold);
     ui->BtnOpenUart->setFont(serifFont);
+    ui->statusBar->showMessage(tr("成功打开串口 ") + portName);
 }
 
 void MainWindow::on_BtnCloseUart_clicked()
@@ -116,6 +117,8 @@ static char fx_mul_lamp_pwm_out[] = {0xAA, 0x80, 0xFF, 0x11, 0x01, 0xA0, 0x01, 0
 static const char fx_msg_read_nettop[] = {0xAA, 0x80, 0xA0, 0xEE, 0xDD, 0xB9};
 static const char fx_msg_read_pwmin[] = {0xAA, 0x80, 0xA1, 0xEE, 0xDD, 0xB8};
 
+static unsigned short fx_timerCounter = 0, fx_timerMax = 120, fx_timerOVcnt = 0;   // 定时刷新相关
+
 int MainWindow::check_uart_is_open()
 {
     if (!myCom->isOpen()){
@@ -134,7 +137,6 @@ static short addrOP, addrED;
 // int 发送指令长度
 int MainWindow::get_LampCtrlStyle(unsigned char opt_type, char **cmd)
 {
-    //ui->NodeAddr->setText(ui->AddrOP->text());
     bool ok = true, flag = false;
     unsigned char i;
     char *buf;
@@ -146,7 +148,6 @@ int MainWindow::get_LampCtrlStyle(unsigned char opt_type, char **cmd)
         addrED = ui->AddrED->text().toUShort(&ok, 16);
         flag = true;
     }
-    ui->NodeAddr->setNum(addrOP);
     if(opt_type == 0x01){
         if(flag) buf = fx_mul_lamp_on;
         else buf = fx_sig_lamp_on;
@@ -155,10 +156,10 @@ int MainWindow::get_LampCtrlStyle(unsigned char opt_type, char **cmd)
         else buf = fx_sig_lamp_off;
     }else{
         if(flag){
-            fx_mul_lamp_pwm_out[14] = (char) (ui->PWMout_value->value());
+            fx_mul_lamp_pwm_out[14] = (char) (100 - ui->PWMout_value->value());
             buf = fx_mul_lamp_pwm_out;
         }else{
-            fx_sig_lamp_pwm_out[11] = (char) (ui->PWMout_value->value());
+            fx_sig_lamp_pwm_out[11] = (char) (100 - ui->PWMout_value->value());
             buf = fx_sig_lamp_pwm_out;
         }
     }
@@ -244,59 +245,55 @@ void MainWindow::on_BtnPWMoutEn_clicked()
     }
 }
 
-
-static char tmp_buf[20];
 static const char hex2ascii[] = "0123456789ABCDEF";
-void MainWindow::readMyCom()
+
+void MainWindow::ReceiveDataHandle(QByteArray rcvBuf, unsigned short len)
 {
     unsigned short addr, pwm, freq, cnt;
-    double lltmp;
-	
-    qDebug() << "read:" << myCom->bytesAvailable() << "bytes";
-    QByteArray temp = myCom->readAll();
-    ui->textBrowser->append(tr("接收 < ")+temp.toHex() + tr(" >"));
-    if((temp[0] == 0xAA) && (temp[1] == 0x80)){
-        if(temp[2] == 0xA1){	// PWM INPUT
+    char *buf = rcvBuf.data();
+    ui->statusBar->showMessage(tr("开始解析接收数据"));
+    if((rcvBuf[0] == 0xAA) && (rcvBuf[1] == 0x80)){
+        if(rcvBuf[2] == 0xA1){	// PWM INPUT
             ui->statusBar->showMessage(tr("发送读取路灯状态信息指令"));
             ui->textBrowser->clear();
-            ui->textBrowser->append(tr("接收 < ")+temp.toHex() + tr(" >"));
+            ui->textBrowser->append(tr("接收 < ")+rcvBuf.toHex().toUpper() + tr(" >"));
             cnt = 3;
             while(cnt < 1000){
-                if(temp[cnt] == 0xEE) break;
+                if(rcvBuf[cnt] == 0xEE) break;
 
-                addr = ((unsigned short)temp[cnt] << 8) + temp[cnt + 1];
-                pwm = (unsigned short)temp[cnt + 2];
-                freq = temp[cnt + 4];
+                addr = ((unsigned short)rcvBuf[cnt] << 8) + rcvBuf[cnt + 1];
+                pwm = (unsigned short)rcvBuf[cnt + 2];
+                freq = rcvBuf[cnt + 4];
                 freq *= 256;
-                freq += (unsigned char)temp[cnt + 3];
-                //ui->textBrowser->append(addr);
-                lltmp = addr;
-                ui->NodeAddr->setNum(lltmp);
-                lltmp = pwm;
-                ui->PWM_dutycycle->setNum(lltmp);
+                freq += (unsigned char)rcvBuf[cnt + 3];
                 if(freq > 10000)    // 65535 - 10k - 1.28Mhz
                     freq = 0;
-                lltmp = freq;
-                ui->PWM_freq->setNum(lltmp);
 
-                tmp_buf[0] = hex2ascii[(unsigned char)(temp[cnt] >> 4)&0x0F];
-                tmp_buf[1] = hex2ascii[(unsigned char)temp[cnt]&0x0F];
-                tmp_buf[2] = hex2ascii[(unsigned char)(temp[cnt + 1] >> 4)&0x0F];
-                tmp_buf[3] = hex2ascii[(unsigned char)temp[cnt + 1]&0x0F];
-                tmp_buf[4] = 0;
+                QString strAddr, strDuty, strFreq;
+                strAddr.setNum(addr, 16);
+                strDuty.setNum(pwm, 10);
+                strFreq.setNum(freq, 10);
                 ui->textBrowser->append(tr("--------------------------------------------"
                                            "--------------------------------------------"));
-                ui->textBrowser->append(tr("节点地址：") + tmp_buf +
-                                        tr("  输入电压占空比:") + ui->PWM_dutycycle->text() + tr("%") +
-                                        tr("  功率输出频率值:") + ui->PWM_freq->text() + tr("Hz"));
-                //ui->textBrowser->insertPlainText(rdtmp);
+                ui->textBrowser->append(tr("节点地址：") + strAddr.toUpper() +
+                                        tr("  输入电压占空比:") + strDuty +
+                                        tr("%  功率输出频率值:") + strFreq + tr("Hz"));
+
                 cnt += 7;
             }
             if(cnt == 3) ui->textBrowser->append(tr("*** 没有路灯状态信息数据 ***"));
             else ui->textBrowser->append(tr("****************************"
                                             "*********************************************"));
         }
-	}
+    }
+}
+
+void MainWindow::readMyCom()
+{
+    qDebug() << "read:" << myCom->bytesAvailable() << "bytes";
+    QByteArray temp = myCom->readAll();
+    ui->textBrowser->append(tr("接收 < ")+temp.toHex().toUpper() + tr(" >"));
+    ReceiveDataHandle(temp, myCom->bytesAvailable());
 }
 
 
@@ -321,7 +318,8 @@ void MainWindow::on_BtnPWMin_clicked()
 {
     if(check_uart_is_open() == 0) return;
     myCom->write(fx_msg_read_pwmin, 6);
-    ui->statusBar->showMessage(tr("发送读取PWM信息指令"));
+    ui->statusBar->showMessage(tr("发送读取路灯状态信息指令"));
+    fx_timerCounter = 0;
     qDebug() << "write: "<<myCom->bytesToWrite()<<"bytes";
 }
 
@@ -356,10 +354,9 @@ void MainWindow::on_lampPowerMax_textChanged(QString )
     bool ok = true;
 
     lampPowerMaxValue = ui->lampPowerMax->text().toShort(&ok, 10);
+    ui->lampPowerValue->setMaximum(lampPowerMaxValue);
+    ui->lampPowerValue->setMinimum(lampPowerMaxValue / 2);
     ui->lampPowerValue->setValue(lampPowerMaxValue);
-    //ui->lampPowerValue->setMaximum(lampPowerMaxValue);
-    //ui->lampPowerValue->setMinimum(lampPowerMaxValue / 2);
-    ui->NodeAddr->setNum(lampPowerMaxValue);
 }
 
 void MainWindow::on_PWMout_value_valueChanged(int value)
@@ -371,7 +368,7 @@ void MainWindow::on_PWMout_value_valueChanged(int value)
     ui->lampPowerValue->setValue(v);
     ui->lampBar->setValue(w/2 + 50);
     ui->lampSlider->setValue(w);
-    ui->label_powerPercent->setText(ui->lampBar->text());
+    //ui->label_powerPercent->setText(ui->lampBar->text());
 }
 
 void MainWindow::on_lampPowerValue_valueChanged(int )
@@ -385,35 +382,45 @@ void MainWindow::on_lampPowerValue_valueChanged(int )
     ui->PWMout_value->setValue(v);
     ui->lampSlider->setValue(v);
     ui->lampBar->setValue(w * 100 / lampPowerMaxValue);
-    ui->label_powerPercent->setText(ui->lampBar->text());
+    //ui->label_powerPercent->setText(ui->lampBar->text());
 }
 
-void MainWindow::on_lampSlider_sliderMoved(int position)
+void MainWindow::on_lampSlider_valueChanged(int value)
 {
     if(ui->radio_slider->isChecked() == false) return;
 
-    unsigned short v, w;
-    w = ui->lampSlider->value();
-    v = lampPowerMaxValue * (w + 100) / 200;
+    unsigned short v;
+    v = lampPowerMaxValue * (value + 100) / 200;
     ui->lampPowerValue->setValue(v);
-    ui->lampBar->setValue(w/2 + 50);
-    ui->PWMout_value->setValue(w);
-    ui->label_powerPercent->setText(ui->lampBar->text());
+    ui->lampBar->setValue(value/2 + 50);
+    ui->PWMout_value->setValue(value);
+    //ui->label_powerPercent->setText(ui->lampBar->text());
+}
+
+void MainWindow::on_radio_slider_clicked()
+{
+    ui->lampSlider->setEnabled(true);
+    ui->lampPowerValue->setEnabled(false);
+    ui->PWMout_value->setEnabled(false);
+    ui->lampSlider->setBackgroundRole(QPalette::Background);
+    ui->lampSlider->setStyleSheet("background-color: rgb(255, 170, 127)");
 }
 
 void MainWindow::on_radio_percent_clicked()
 {
     ui->PWMout_value->setEnabled(true);
     ui->lampPowerValue->setEnabled(false);
+    ui->lampSlider->setEnabled(false);
+    ui->lampSlider->setStyleSheet("background-color: rgb(255, 255, 127)");
 }
 
 void MainWindow::on_radio_power_clicked()
 {
     ui->lampPowerValue->setEnabled(true);
     ui->PWMout_value->setEnabled(false);
+    ui->lampSlider->setEnabled(false);
+    ui->lampSlider->setStyleSheet("background-color: rgb(255, 255, 127)");
 }
-
-static unsigned short fx_timerCounter = 0, fx_timerMax = 120, fx_timerOVcnt = 0;
 
 void MainWindow::timerUpdate()
 {
@@ -423,10 +430,10 @@ void MainWindow::timerUpdate()
             fx_timerCounter = 0;
             if(ui->BtnPWMin->isEnabled())
                 on_BtnPWMin_clicked();
-            ui->statusBar->showMessage(tr("定时读取路灯状态信息"));
             fx_timerOVcnt ++;
             if(fx_timerOVcnt > 998) fx_timerOVcnt = 0;
             ui->label_timerOVcnt->setNum(fx_timerOVcnt);
+            ui->statusBar->showMessage(tr("定时读取路灯状态信息"));
         }
         ui->lcdTimer->display(fx_timerMax - fx_timerCounter);
         ui->timerBar->setValue(fx_timerCounter);
@@ -438,7 +445,7 @@ void MainWindow::on_chkBoxRefresh_clicked()
     fx_timerMax = ui->timeCounter->value();
     if(ui->chkBoxRefresh->isChecked()){
         ui->label_refresh_info->setEnabled(true);
-        ui->lcdTimer->setEnabled(true);
+        //ui->lcdTimer->setEnabled(true);
         ui->timeCounter->setEnabled(true);
         ui->timerBar->setMaximum(fx_timerMax);
         ui->timerBar->setValue(0);
@@ -463,4 +470,12 @@ void MainWindow::on_timeCounter_valueChanged(int )
     ui->timerBar->setValue(0);
 }
 
-
+void MainWindow::on_textBrowserFontSlider_valueChanged(int value)
+{
+    QString str;
+    QFont serifFont("Arial", value, QFont::Bold);
+    ui->textBrowser->setFont(serifFont);
+    str.setNum(value);
+    //ui->textBrowser->fontInfo();
+    ui->textBrowserFontLabel->setText(ui->textBrowser->font().toString()); //str + tr("号字体"));
+}

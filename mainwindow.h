@@ -28,11 +28,13 @@ private:
     QTimer *timer;
 
 private slots:
+    void on_radio_slider_clicked();
+    void on_textBrowserFontSlider_valueChanged(int value);
     void on_timeCounter_valueChanged(int );
     void on_chkBoxRefresh_clicked();
     void on_radio_power_clicked();
     void on_radio_percent_clicked();
-    void on_lampSlider_sliderMoved(int position);
+    void on_lampSlider_valueChanged(int value);
     void on_lampPowerValue_valueChanged(int );
     void on_PWMout_value_valueChanged(int );
     void on_lampPowerMax_textChanged(QString );
@@ -50,6 +52,7 @@ private slots:
     void on_BtnOpenUart_clicked();
     void on_BtnAddUart_clicked();
     void readMyCom();
+    void ReceiveDataHandle(QByteArray rcvBuf, unsigned short len);
     void timerUpdate();
 };
 

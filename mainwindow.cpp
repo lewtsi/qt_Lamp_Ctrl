@@ -4,6 +4,7 @@
 #include <QFont>
 
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -17,6 +18,48 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+static QHostAddress netAddress;
+void MainWindow::fx_getLocalIpAddr()
+{
+    QList<QHostAddress> list = QNetworkInterface::allAddresses();
+    foreach (QHostAddress address, list){
+    if(address.protocol() == QAbstractSocket::IPv4Protocol)//我们使用IPv4地址
+        netAddress = address;
+    }
+}
+
+void MainWindow::on_radioBtn_COM_clicked()
+{
+    ui->groupBox_COM->setEnabled(true);
+    ui->groupBox_NET->setEnabled(false);
+    ui->groupBox_USB->setEnabled(false);
+}
+
+void MainWindow::on_radioBtn_NET_clicked()
+{
+    ui->groupBox_NET->setEnabled(true);
+    ui->groupBox_COM->setEnabled(false);
+    ui->groupBox_USB->setEnabled(false);
+    /*QString localHostName = QHostInfo::localHostName();
+    qDebug() <<"localHostName: "<<localHostName;
+    QHostInfo info = QHostInfo::fromName(localHostName);
+    qDebug() <<"IP Address: "<<info.addresses();
+    foreach(QHostAddress address,info.addresses()){
+        if(address.protocol() == QAbstractSocket::IPv4Protocol)
+            qDebug() << address.toString();
+    }*/
+    fx_getLocalIpAddr();
+    ui->netIpAddr->setText(netAddress.toString());
+}
+
+void MainWindow::on_radioBtn_USB_clicked()
+{
+    ui->groupBox_USB->setEnabled(true);
+    ui->groupBox_COM->setEnabled(false);
+    ui->groupBox_NET->setEnabled(false);
+}
+
 
 void MainWindow::on_BtnAddUart_clicked()
 {
@@ -102,6 +145,56 @@ void MainWindow::on_BtnCloseUart_clicked()
     ui->BtnOpenUart->setFont(serifFont);
 }
 
+// =======================  网络方式 =================
+void MainWindow::on_btnNetStart_clicked()
+{
+    tcpServer = new QTcpServer(this);
+    connect(tcpServer, SIGNAL(newConnection()), this,
+                        SLOT(tcpServerAcceptConnection()));
+    netRcvCounter = 0;
+    if(! tcpServer->listen(netAddress,ui->netPortNumb->text().toShort())){
+        qDebug() << tcpServer->errorString();
+        return;
+    }
+    ui->netLabelStatus->setText(tr("状态：监听"));
+
+    ui->btnNetStart->setText(tr("断开连接"));
+    QPalette pal = ui->btnNetStart->palette();
+    pal.setColor(QPalette::ButtonText,QColor(255,0,0));
+    ui->btnNetStart->setPalette(pal);
+}
+
+void MainWindow::tcpServerAcceptConnection()
+{
+    tcpServerConnection = tcpServer->nextPendingConnection();
+    connect(tcpServerConnection, SIGNAL(readyRead()), this,
+            SLOT(readNetMessage()));
+    connect(tcpServerConnection,
+            SIGNAL(displayError(QAbstractSocket::SocketError)), this,
+            SLOT(tcpServerDisplayError(QAbstractSocket::SocketError)));
+    ui->netLabelStatus->setText(tr("接受连接"));
+    tcpServer->close();
+}
+
+void MainWindow::tcpServerDisplayError(QAbstractSocket::SocketError)
+{
+    qDebug() << tcpServerConnection->errorString();
+    tcpServerConnection->close();
+    ui->netLabelStatus->setText(tr("服务端就绪"));
+    ui->btnNetStart->setText(tr("开启TCP服务器"));
+}
+
+void MainWindow::readNetMessage()
+{
+    qDebug() << "Net read:" << tcpServerConnection->bytesAvailable() << "bytes.";
+    QByteArray temp = tcpServerConnection->readAll();
+    ui->textBrowser->append(tr("TCP <") + temp.toHex().toUpper() + tr(" >"));
+    //qDebug() << "read:" << tcpSocket->bytesAvailable() << "bytes";
+    //QByteArray temp = myCom->readAll();
+   // ui->textBrowser->append(tr("接收 < ")+temp.toHex().toUpper() + tr(" >"));
+}
+
+// =================================================
 static char fx_sig_lamp_on[] = {0xAA, 0x80, 0xFC, 0x0E, 0x01,
                                 0xAE, 0x04, 0xBB, 0x00, 0xAC, 0xDF, 0x01, 0xEE, 0xDD, 0x89};    // len = 15
 static char fx_sig_lamp_off[] = {0xAA, 0x80, 0xFC, 0x0E, 0x01,
@@ -214,7 +307,7 @@ void MainWindow::on_BtnLampOn_clicked()
 
     if(len != 0){
         myCom->write(CtrlCmd, len);
-        ui->statusBar->showMessage(tr("发送开灯信号成功"));
+        ui->statusBar->showMessage(tr("发送开灯信号指令"));
         qDebug() << "write: "<<myCom->bytesToWrite()<<"bytes";
     }
 }
@@ -249,23 +342,27 @@ static const char hex2ascii[] = "0123456789ABCDEF";
 
 void MainWindow::ReceiveDataHandle(QByteArray rcvBuf, unsigned short len)
 {
-    unsigned short addr, pwm, freq, cnt;
-    char *buf = rcvBuf.data();
-    ui->statusBar->showMessage(tr("开始解析接收数据"));
-    if((rcvBuf[0] == 0xAA) && (rcvBuf[1] == 0x80)){
-        if(rcvBuf[2] == 0xA1){	// PWM INPUT
-            ui->statusBar->showMessage(tr("发送读取路灯状态信息指令"));
+    quint16 addr, pwm, freq, cnt;
+    //char *buf = rcvBuf.data();
+
+    //if(*buf != 0x80)
+    //ui->usbVIDvalue->setText("error");
+    //else
+    //ui->statusBar->showMessage(tr("开始解析接收数据"));
+    if((0xAA == (quint8)rcvBuf[0]) && (0x80 == (quint8)rcvBuf[1])){
+        if(0xA1 == (quint8)rcvBuf[2]){	// PWM INPUT
+            ui->statusBar->showMessage(tr("解析路灯状态信息指令"));
             ui->textBrowser->clear();
             ui->textBrowser->append(tr("接收 < ")+rcvBuf.toHex().toUpper() + tr(" >"));
             cnt = 3;
             while(cnt < 1000){
-                if(rcvBuf[cnt] == 0xEE) break;
+                if(0xEE == (quint8)rcvBuf[cnt]) break;
 
-                addr = ((unsigned short)rcvBuf[cnt] << 8) + rcvBuf[cnt + 1];
-                pwm = (unsigned short)rcvBuf[cnt + 2];
+                addr = ((quint16)rcvBuf[cnt] << 8) + rcvBuf[cnt + 1];
+                pwm = (quint16)rcvBuf[cnt + 2];
                 freq = rcvBuf[cnt + 4];
                 freq *= 256;
-                freq += (unsigned char)rcvBuf[cnt + 3];
+                freq += (quint8)rcvBuf[cnt + 3];
                 if(freq > 10000)    // 65535 - 10k - 1.28Mhz
                     freq = 0;
 
@@ -277,13 +374,25 @@ void MainWindow::ReceiveDataHandle(QByteArray rcvBuf, unsigned short len)
                                            "--------------------------------------------"));
                 ui->textBrowser->append(tr("节点地址：") + strAddr.toUpper() +
                                         tr("  输入电压占空比:") + strDuty +
-                                        tr("%  功率输出频率值:") + strFreq + tr("Hz"));
+                                        tr("%  输出功率频率值:") + strFreq + tr("Hz"));
+                if(freq == 0)
+                    ui->textBrowser->append(tr("该节点输出功率频率值 有误 ！！！"));
 
                 cnt += 7;
             }
             if(cnt == 3) ui->textBrowser->append(tr("*** 没有路灯状态信息数据 ***"));
             else ui->textBrowser->append(tr("****************************"
                                             "*********************************************"));
+        }else if(0xA3 == (quint8)rcvBuf[2]){    // 节点离线信息上报
+            QString strAddr;
+            cnt = 0;    // AA 80 A3 01 AA CC 02 AE 01 AE 02 EE DD XOR
+            while(cnt < 15){
+                if(cnt >= rcvBuf[3]) break;
+                addr = ((quint16)rcvBuf[7 + cnt * 2] << 8) + rcvBuf[8 + cnt * 2];
+                strAddr.setNum(addr, 16);
+                ui->textBrowser->append(strAddr.toUpper() + tr(" 节点离线"));
+                cnt ++;
+            }
         }
     }
 }
@@ -356,7 +465,7 @@ void MainWindow::on_lampPowerMax_textChanged(QString )
     lampPowerMaxValue = ui->lampPowerMax->text().toShort(&ok, 10);
     ui->lampPowerValue->setMaximum(lampPowerMaxValue);
     ui->lampPowerValue->setMinimum(lampPowerMaxValue / 2);
-    ui->lampPowerValue->setValue(lampPowerMaxValue);
+    ui->lampPowerValue->setValue(lampPowerMaxValue * (ui->PWMout_value->value()/2 + 50) / 100);
 }
 
 void MainWindow::on_PWMout_value_valueChanged(int value)

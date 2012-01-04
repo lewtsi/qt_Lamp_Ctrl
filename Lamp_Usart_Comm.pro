@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT			 += network
 
 TARGET = Lamp_Usart_Comm
 TEMPLATE = app

@@ -8,6 +8,7 @@
 #include <QInputDialog>
 #include <QFileDialog>
 #include <QTextStream>
+#include <QtNetwork>
 #include "win_qextserialport.h"
 
 namespace Ui {
@@ -26,8 +27,19 @@ private:
     Ui::MainWindow *ui;
     Win_QextSerialPort *myCom;
     QTimer *timer;
+    QTcpServer *tcpServer;
+    QTcpSocket *tcpServerConnection;
+    qint32 netRcvCounter;
 
 private slots:
+    void on_btnNetStart_clicked();
+    //void tcpServerStart();   //开始监听
+    void tcpServerAcceptConnection();  //建立连接
+    void tcpServerDisplayError(QAbstractSocket::SocketError socketError);    // 显示错误
+    void fx_getLocalIpAddr();
+    void on_radioBtn_USB_clicked();
+    void on_radioBtn_NET_clicked();
+    void on_radioBtn_COM_clicked();
     void on_radio_slider_clicked();
     void on_textBrowserFontSlider_valueChanged(int value);
     void on_timeCounter_valueChanged(int );
@@ -52,6 +64,7 @@ private slots:
     void on_BtnOpenUart_clicked();
     void on_BtnAddUart_clicked();
     void readMyCom();
+    void readNetMessage();
     void ReceiveDataHandle(QByteArray rcvBuf, unsigned short len);
     void timerUpdate();
 };

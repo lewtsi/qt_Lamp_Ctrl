@@ -17,9 +17,9 @@
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>140</y>
-      <width>641</width>
+      <width>651</width>
       <height>71</height>
      </rect>
     </property>
@@ -29,7 +29,7 @@
     <widget class="QLabel" name="label_to">
      <property name="geometry">
       <rect>
-       <x>320</x>
+       <x>340</x>
        <y>40</y>
        <width>31</width>
        <height>20</height>
@@ -73,7 +73,7 @@
       <rect>
        <x>250</x>
        <y>40</y>
-       <width>61</width>
+       <width>81</width>
        <height>20</height>
       </rect>
      </property>
@@ -101,9 +101,9 @@
     <widget class="QLineEdit" name="AddrED">
      <property name="geometry">
       <rect>
-       <x>360</x>
+       <x>380</x>
        <y>40</y>
-       <width>61</width>
+       <width>81</width>
        <height>20</height>
       </rect>
      </property>
@@ -179,7 +179,7 @@
     <widget class="QCheckBox" name="chkBox_odd">
      <property name="geometry">
       <rect>
-       <x>430</x>
+       <x>500</x>
        <y>20</y>
        <width>71</width>
        <height>16</height>
@@ -206,7 +206,7 @@
     <widget class="QCheckBox" name="chkBox_even">
      <property name="geometry">
       <rect>
-       <x>430</x>
+       <x>500</x>
        <y>40</y>
        <width>71</width>
        <height>16</height>
@@ -227,138 +227,6 @@
       <string>偶数灯</string>
      </property>
      <property name="checked">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="dir_01">
-     <property name="geometry">
-      <rect>
-       <x>580</x>
-       <y>10</y>
-       <width>16</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="checked">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="dir_02">
-     <property name="geometry">
-      <rect>
-       <x>560</x>
-       <y>30</y>
-       <width>16</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="dir_04">
-     <property name="geometry">
-      <rect>
-       <x>600</x>
-       <y>29</y>
-       <width>16</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="dir_03">
-     <property name="geometry">
-      <rect>
-       <x>580</x>
-       <y>50</y>
-       <width>16</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="dir_05">
-     <property name="geometry">
-      <rect>
-       <x>560</x>
-       <y>10</y>
-       <width>16</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="dir_08">
-     <property name="geometry">
-      <rect>
-       <x>600</x>
-       <y>10</y>
-       <width>16</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="dir_06">
-     <property name="geometry">
-      <rect>
-       <x>560</x>
-       <y>50</y>
-       <width>16</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="dir_07">
-     <property name="geometry">
-      <rect>
-       <x>600</x>
-       <y>50</y>
-       <width>16</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QRadioButton" name="radioButton_4">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>580</x>
-       <y>30</y>
-       <width>16</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="checkable">
-      <bool>true</bool>
-     </property>
-     <property name="checked">
-      <bool>false</bool>
-     </property>
-     <property name="autoExclusive">
       <bool>true</bool>
      </property>
     </widget>
@@ -456,79 +324,13 @@
       <enum>Qt::Vertical</enum>
      </property>
     </widget>
-    <widget class="QLabel" name="label_13">
-     <property name="geometry">
-      <rect>
-       <x>520</x>
-       <y>10</y>
-       <width>41</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>宋体</family>
-       <pointsize>12</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>方向</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_14">
-     <property name="geometry">
-      <rect>
-       <x>520</x>
-       <y>30</y>
-       <width>41</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>宋体</family>
-       <pointsize>12</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>代码</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_16">
-     <property name="geometry">
-      <rect>
-       <x>530</x>
-       <y>50</y>
-       <width>21</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Arial</family>
-       <pointsize>12</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(170, 0, 0);</string>
-     </property>
-     <property name="text">
-      <string>01</string>
-     </property>
-    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>220</y>
-      <width>641</width>
+      <width>651</width>
       <height>171</height>
      </rect>
     </property>
@@ -732,7 +534,7 @@ background-color: rgb(255, 255, 127);</string>
       <enum>QLCDNumber::Filled</enum>
      </property>
      <property name="intValue" stdset="0">
-      <number>120</number>
+      <number>30</number>
      </property>
     </widget>
     <widget class="QCheckBox" name="chkBoxRefresh">
@@ -796,13 +598,16 @@ background-color: rgb(255, 255, 127);</string>
       </rect>
      </property>
      <property name="minimum">
-      <number>120</number>
+      <number>10</number>
      </property>
      <property name="maximum">
       <number>600</number>
      </property>
      <property name="singleStep">
       <number>10</number>
+     </property>
+     <property name="value">
+      <number>30</number>
      </property>
     </widget>
     <widget class="QSlider" name="lampSlider">
@@ -847,7 +652,7 @@ background-color: rgb(255, 255, 127);</string>
       <rect>
        <x>190</x>
        <y>110</y>
-       <width>441</width>
+       <width>451</width>
        <height>20</height>
       </rect>
      </property>
@@ -1077,7 +882,7 @@ background-color: rgb(239, 159, 0);
       <rect>
        <x>540</x>
        <y>140</y>
-       <width>91</width>
+       <width>101</width>
        <height>21</height>
       </rect>
      </property>
@@ -1121,9 +926,9 @@ background-color: rgb(239, 159, 0);
    <widget class="QTextBrowser" name="textBrowser">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>400</y>
-      <width>641</width>
+      <width>651</width>
       <height>161</height>
      </rect>
     </property>
@@ -1136,7 +941,7 @@ background-color: rgb(239, 159, 0);
      </font>
     </property>
    </widget>
-   <widget class="QGroupBox" name="groupBox_3">
+   <widget class="QGroupBox" name="groupBox_COM">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -1283,7 +1088,7 @@ background-color: rgb(239, 159, 0);
      </property>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBox_4">
+   <widget class="QGroupBox" name="groupBox_NET">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -1303,7 +1108,7 @@ background-color: rgb(239, 159, 0);
       <rect>
        <x>80</x>
        <y>50</y>
-       <width>131</width>
+       <width>61</width>
        <height>20</height>
       </rect>
      </property>
@@ -1317,6 +1122,9 @@ background-color: rgb(239, 159, 0);
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(255, 85, 0);</string>
+     </property>
+     <property name="inputMask">
+      <string>99999; </string>
      </property>
      <property name="text">
       <string>33211</string>
@@ -1393,7 +1201,7 @@ background-color: rgb(239, 159, 0);
       <rect>
        <x>20</x>
        <y>80</y>
-       <width>191</width>
+       <width>181</width>
        <height>31</height>
       </rect>
      </property>
@@ -1409,8 +1217,21 @@ background-color: rgb(239, 159, 0);
       <string>开启TCP服务器</string>
      </property>
     </widget>
+    <widget class="QLabel" name="netLabelStatus">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>50</y>
+       <width>61</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>状态：停止</string>
+     </property>
+    </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBox_5">
+   <widget class="QGroupBox" name="groupBox_USB">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -1509,19 +1330,19 @@ background-color: rgb(239, 159, 0);
      </property>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBox_6">
+   <widget class="QGroupBox" name="groupBox_PORT">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>9</y>
-      <width>81</width>
+      <width>91</width>
       <height>121</height>
      </rect>
     </property>
     <property name="title">
      <string>通信端口</string>
     </property>
-    <widget class="QRadioButton" name="radioButton">
+    <widget class="QRadioButton" name="radioBtn_COM">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -1545,7 +1366,7 @@ background-color: rgb(239, 159, 0);
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_3">
+    <widget class="QRadioButton" name="radioBtn_USB">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -1569,7 +1390,7 @@ background-color: rgb(239, 159, 0);
       <string>USB</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_2">
+    <widget class="QRadioButton" name="radioBtn_NET">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -1651,6 +1472,16 @@ background-color: rgb(239, 159, 0);
      <string>数据解析测试</string>
     </property>
    </widget>
+   <zorder>BtnTest</zorder>
+   <zorder>groupBox</zorder>
+   <zorder>groupBox_2</zorder>
+   <zorder>textBrowser</zorder>
+   <zorder>groupBox_COM</zorder>
+   <zorder>groupBox_NET</zorder>
+   <zorder>groupBox_USB</zorder>
+   <zorder>groupBox_PORT</zorder>
+   <zorder>textBrowserFontSlider</zorder>
+   <zorder>textBrowserFontLabel</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

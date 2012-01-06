@@ -50,7 +50,7 @@ void MainWindow::on_radioBtn_NET_clicked()
             qDebug() << address.toString();
     }*/
     fx_getLocalIpAddr();
-    ui->netIpAddr->setText(netAddress.toString());
+    //ui->netIpAddr->setText(netAddress.toString());
 }
 
 void MainWindow::on_radioBtn_USB_clicked()
@@ -376,7 +376,7 @@ void MainWindow::ReceiveDataHandle(QByteArray rcvBuf, unsigned short len)
                                         tr("  输入电压占空比:") + strDuty +
                                         tr("%  输出功率频率值:") + strFreq + tr("Hz"));
                 if(freq == 0)
-                    ui->textBrowser->append(tr("该节点输出功率频率值 有误 ！！！"));
+                    ui->textBrowser->append(tr("该编号的灯已熄灭"));
 
                 cnt += 7;
             }
@@ -387,7 +387,7 @@ void MainWindow::ReceiveDataHandle(QByteArray rcvBuf, unsigned short len)
             QString strAddr;
             cnt = 0;    // AA 80 A3 01 AA CC 02 AE 01 AE 02 EE DD XOR
             while(cnt < 15){
-                if(cnt >= rcvBuf[3]) break;
+                if(cnt >= rcvBuf[6]) break;
                 addr = ((quint16)rcvBuf[7 + cnt * 2] << 8) + rcvBuf[8 + cnt * 2];
                 strAddr.setNum(addr, 16);
                 ui->textBrowser->append(strAddr.toUpper() + tr(" 节点离线"));

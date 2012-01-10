@@ -3,7 +3,8 @@
 #include <QDebug>
 #include <QFont>
 
-
+#define DEBUG_INFO_EN 0
+static QString VersionString = "v0.16";
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -11,7 +12,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(timerUpdate()));
+    timer->stop();
+    rfTimer = new QTimer(this);
+    connect(rfTimer, SIGNAL(timeout()), this, SLOT(rftimerUpdate()));
     ui->setupUi(this);
+    ui->statusBar->showMessage(tr(" 软件版本 ： ") + VersionString);
 }
 
 MainWindow::~MainWindow()
@@ -212,6 +217,23 @@ static const char fx_msg_read_pwmin[] = {0xAA, 0x80, 0xA1, 0xEE, 0xDD, 0xB8};
 
 static unsigned short fx_timerCounter = 0, fx_timerMax = 120, fx_timerOVcnt = 0;   // 定时刷新相关
 
+static quint8 rfSendRetryCnt = 0;
+static char *CtrlCmd;
+static quint8 CtrlCmdLen;
+
+void MainWindow::rftimerUpdate()
+{
+    if(rfSendRetryCnt){
+        rfSendRetryCnt --;
+        myCom->write(CtrlCmd, CtrlCmdLen);
+    }else{
+        rfTimer->stop();
+        ui->BtnLampOn->setEnabled(true);
+        ui->BtnLampOff->setEnabled(true);
+        ui->BtnPWMoutEn->setEnabled(true);
+    }
+}
+
 int MainWindow::check_uart_is_open()
 {
     if (!myCom->isOpen()){
@@ -267,7 +289,7 @@ int MainWindow::get_LampCtrlStyle(unsigned char opt_type, char **cmd)
             if(ui->chkBox_even->isChecked()){
                 buf[9] = 0;
             }else{
-                buf[9] |= 0x01;
+                buf[9] = 0x01;
             }
         }else{
             if(ui->chkBox_even->isChecked()){
@@ -297,7 +319,6 @@ int MainWindow::get_LampCtrlStyle(unsigned char opt_type, char **cmd)
         return 0;
 }
 
-static char *CtrlCmd;
 void MainWindow::on_BtnLampOn_clicked()
 {
     int len;
@@ -306,7 +327,13 @@ void MainWindow::on_BtnLampOn_clicked()
     len = get_LampCtrlStyle(0x01, &CtrlCmd);
 
     if(len != 0){
+        CtrlCmdLen = len;
         myCom->write(CtrlCmd, len);
+        rfSendRetryCnt = 2;
+        rfTimer->start(300);
+        ui->BtnLampOn->setEnabled(false);
+        ui->BtnLampOff->setEnabled(false);
+        ui->BtnPWMoutEn->setEnabled(false);
         ui->statusBar->showMessage(tr("发送开灯信号指令"));
         qDebug() << "write: "<<myCom->bytesToWrite()<<"bytes";
     }
@@ -319,7 +346,13 @@ void MainWindow::on_BtnLampOff_clicked()
     len = get_LampCtrlStyle(0x02, &CtrlCmd);
 
     if(len != 0){
+        CtrlCmdLen = len;
         myCom->write(CtrlCmd, len);
+        rfSendRetryCnt = 2;
+        rfTimer->start(300);
+        ui->BtnLampOn->setEnabled(false);
+        ui->BtnLampOff->setEnabled(false);
+        ui->BtnPWMoutEn->setEnabled(false);
         ui->statusBar->showMessage(tr("发送关灯信号指令"));
         qDebug() << "write: "<<myCom->bytesToWrite()<<"bytes";
     }
@@ -332,7 +365,13 @@ void MainWindow::on_BtnPWMoutEn_clicked()
     len = get_LampCtrlStyle(0x03, &CtrlCmd);
 
     if(len != 0){
+        CtrlCmdLen = len;
         myCom->write(CtrlCmd, len);
+        rfSendRetryCnt = 2;
+        rfTimer->start(300);
+        ui->BtnLampOn->setEnabled(false);
+        ui->BtnLampOff->setEnabled(false);
+        ui->BtnPWMoutEn->setEnabled(false);
         ui->statusBar->showMessage(tr("发送调光信号指令"));
         qDebug() << "write: "<<myCom->bytesToWrite()<<"bytes";
     }
@@ -353,12 +392,14 @@ void MainWindow::ReceiveDataHandle(QByteArray rcvBuf, unsigned short len)
         if(0xA1 == (quint8)rcvBuf[2]){	// PWM INPUT
             ui->statusBar->showMessage(tr("解析路灯状态信息指令"));
             ui->textBrowser->clear();
+            #if(DEBUG_INFO_EN)
             ui->textBrowser->append(tr("接收 < ")+rcvBuf.toHex().toUpper() + tr(" >"));
+            #endif
             cnt = 3;
             while(cnt < 1000){
                 if(0xEE == (quint8)rcvBuf[cnt]) break;
 
-                addr = ((quint16)rcvBuf[cnt] << 8) + rcvBuf[cnt + 1];
+                addr = ((quint16)rcvBuf[cnt] << 8) + (quint8)rcvBuf[cnt + 1];
                 pwm = (quint16)rcvBuf[cnt + 2];
                 freq = rcvBuf[cnt + 4];
                 freq *= 256;
@@ -373,8 +414,8 @@ void MainWindow::ReceiveDataHandle(QByteArray rcvBuf, unsigned short len)
                 ui->textBrowser->append(tr("--------------------------------------------"
                                            "--------------------------------------------"));
                 ui->textBrowser->append(tr("节点地址：") + strAddr.toUpper() +
-                                        tr("  输入电压占空比:") + strDuty +
-                                        tr("%  输出功率频率值:") + strFreq + tr("Hz"));
+                                        tr("  输入电压信息: ") + strDuty +
+                                        tr("  输出功率信息: ") + strFreq);
                 if(freq == 0)
                     ui->textBrowser->append(tr("该编号的灯已熄灭"));
 
@@ -388,10 +429,29 @@ void MainWindow::ReceiveDataHandle(QByteArray rcvBuf, unsigned short len)
             cnt = 0;    // AA 80 A3 01 AA CC 02 AE 01 AE 02 EE DD XOR
             while(cnt < 15){
                 if(cnt >= rcvBuf[6]) break;
-                addr = ((quint16)rcvBuf[7 + cnt * 2] << 8) + rcvBuf[8 + cnt * 2];
+                addr = ((quint16)rcvBuf[7 + cnt * 2] << 8) + (quint8)rcvBuf[8 + cnt * 2];
                 strAddr.setNum(addr, 16);
                 ui->textBrowser->append(strAddr.toUpper() + tr(" 节点离线"));
                 cnt ++;
+            }
+        }else if(0xA0 == (quint8)rcvBuf[2]){    // 网络拓扑
+            //AA 80 A0 05 AE 01 AE 02 AE 03 AE 11 AE 12 AE CC AE 01 AE 01 AE CC AE 11 01 01 01 02 02 EE DD AB
+            ui->textBrowser->clear();
+            if(0 == (quint8)rcvBuf[3]){
+                ui->textBrowser->append(tr("该网络中尚未有在线节点信息"));
+                return;
+            }
+            QString node_addr, parent_addr;
+            quint8 tmpcnt = 0;
+            cnt = (quint8)rcvBuf[3] * 2;
+            while(tmpcnt < (quint8)rcvBuf[3]){
+                addr = ((quint16)rcvBuf[4 + tmpcnt * 2] << 8) + (quint8)rcvBuf[5 + tmpcnt * 2];
+                pwm = ((quint16)rcvBuf[4 + cnt + tmpcnt * 2] << 8) + (quint8)rcvBuf[5 + cnt + tmpcnt * 2];
+                node_addr.setNum(addr, 16);
+                parent_addr.setNum(pwm, 16);
+                ui->textBrowser->append(tr("节点地址") + node_addr.toUpper() +
+                                        tr(" 其父节点地址为") + parent_addr.toUpper());
+                tmpcnt ++;
             }
         }
     }
@@ -399,10 +459,14 @@ void MainWindow::ReceiveDataHandle(QByteArray rcvBuf, unsigned short len)
 
 void MainWindow::readMyCom()
 {
-    qDebug() << "read:" << myCom->bytesAvailable() << "bytes";
+    quint16 cnt;
+    cnt = myCom->bytesAvailable();
+    qDebug() << "read:" << cnt << "bytes";
     QByteArray temp = myCom->readAll();
+    #if(DEBUG_INFO_EN)
     ui->textBrowser->append(tr("接收 < ")+temp.toHex().toUpper() + tr(" >"));
-    ReceiveDataHandle(temp, myCom->bytesAvailable());
+    #endif
+    ReceiveDataHandle(temp, cnt);
 }
 
 
@@ -587,4 +651,9 @@ void MainWindow::on_textBrowserFontSlider_valueChanged(int value)
     str.setNum(value);
     //ui->textBrowser->fontInfo();
     ui->textBrowserFontLabel->setText(ui->textBrowser->font().toString()); //str + tr("号字体"));
+}
+
+void MainWindow::on_BtnClearText_clicked()
+{
+    ui->textBrowser->clear();
 }

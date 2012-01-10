@@ -26,12 +26,13 @@ public:
 private:
     Ui::MainWindow *ui;
     Win_QextSerialPort *myCom;
-    QTimer *timer;
+    QTimer *timer, *rfTimer;
     QTcpServer *tcpServer;
     QTcpSocket *tcpServerConnection;
     qint32 netRcvCounter;
 
 private slots:
+    void on_BtnClearText_clicked();
     void on_btnNetStart_clicked();
     //void tcpServerStart();   //开始监听
     void tcpServerAcceptConnection();  //建立连接
@@ -67,6 +68,7 @@ private slots:
     void readNetMessage();
     void ReceiveDataHandle(QByteArray rcvBuf, unsigned short len);
     void timerUpdate();
+    void rftimerUpdate();
 };
 
 #endif // MAINWINDOW_H

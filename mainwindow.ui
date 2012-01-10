@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>677</width>
+    <width>673</width>
     <height>612</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>ATZGB路灯控制软件 内测版本v0.11</string>
+   <string>北京熙远兴业科技发展有限公司 路灯监控系统 DEMO 版</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>140</y>
+      <y>70</y>
       <width>651</width>
       <height>71</height>
      </rect>
@@ -329,7 +329,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>220</y>
+      <y>150</y>
       <width>651</width>
       <height>171</height>
      </rect>
@@ -545,7 +545,7 @@ background-color: rgb(255, 255, 127);</string>
       <rect>
        <x>200</x>
        <y>140</y>
-       <width>121</width>
+       <width>131</width>
        <height>21</height>
       </rect>
      </property>
@@ -567,9 +567,9 @@ background-color: rgb(255, 255, 127);</string>
      </property>
      <property name="geometry">
       <rect>
-       <x>330</x>
+       <x>340</x>
        <y>140</y>
-       <width>171</width>
+       <width>81</width>
        <height>21</height>
       </rect>
      </property>
@@ -582,7 +582,7 @@ background-color: rgb(255, 255, 127);</string>
       </font>
      </property>
      <property name="text">
-      <string>刷新间隔             秒  倒计时:</string>
+      <string>刷新间隔(秒)</string>
      </property>
     </widget>
     <widget class="QSpinBox" name="timeCounter">
@@ -591,7 +591,7 @@ background-color: rgb(255, 255, 127);</string>
      </property>
      <property name="geometry">
       <rect>
-       <x>390</x>
+       <x>420</x>
        <y>140</y>
        <width>42</width>
        <height>22</height>
@@ -927,9 +927,9 @@ background-color: rgb(239, 159, 0);
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>400</y>
+      <y>330</y>
       <width>651</width>
-      <height>161</height>
+      <height>251</height>
      </rect>
     </property>
     <property name="font">
@@ -947,20 +947,20 @@ background-color: rgb(239, 159, 0);
     </property>
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>10</x>
       <y>10</y>
-      <width>191</width>
-      <height>121</height>
+      <width>651</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="title">
-     <string>串口参数</string>
+     <string/>
     </property>
     <widget class="QComboBox" name="portNameComboBox">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>20</y>
+       <y>10</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -997,9 +997,9 @@ background-color: rgb(239, 159, 0);
     <widget class="QPushButton" name="BtnAddUart">
      <property name="geometry">
       <rect>
-       <x>100</x>
-       <y>20</y>
-       <width>81</width>
+       <x>360</x>
+       <y>10</y>
+       <width>101</width>
        <height>31</height>
       </rect>
      </property>
@@ -1021,9 +1021,9 @@ background-color: rgb(239, 159, 0);
      </property>
      <property name="geometry">
       <rect>
-       <x>100</x>
-       <y>80</y>
-       <width>81</width>
+       <x>230</x>
+       <y>10</y>
+       <width>101</width>
        <height>31</height>
       </rect>
      </property>
@@ -1042,9 +1042,9 @@ background-color: rgb(239, 159, 0);
     <widget class="QPushButton" name="BtnOpenUart">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>80</y>
-       <width>81</width>
+       <x>110</x>
+       <y>10</y>
+       <width>101</width>
        <height>31</height>
       </rect>
      </property>
@@ -1066,27 +1066,6 @@ background-color: rgb(239, 159, 0);
       <string>打开串口</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>60</y>
-       <width>91</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Arial</family>
-       <pointsize>11</pointsize>
-       <weight>50</weight>
-       <bold>false</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>115200 - 8N1</string>
-     </property>
-    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_NET">
     <property name="enabled">
@@ -1095,7 +1074,7 @@ background-color: rgb(239, 159, 0);
     <property name="geometry">
      <rect>
       <x>310</x>
-      <y>10</y>
+      <y>331</y>
       <width>221</width>
       <height>121</height>
      </rect>
@@ -1238,7 +1217,7 @@ background-color: rgb(239, 159, 0);
     <property name="geometry">
      <rect>
       <x>540</x>
-      <y>10</y>
+      <y>331</y>
       <width>121</width>
       <height>121</height>
      </rect>
@@ -1334,7 +1313,7 @@ background-color: rgb(239, 159, 0);
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>9</y>
+      <y>330</y>
       <width>91</width>
       <height>121</height>
      </rect>
@@ -1472,23 +1451,48 @@ background-color: rgb(239, 159, 0);
      <string>数据解析测试</string>
     </property>
    </widget>
-   <zorder>BtnTest</zorder>
+   <widget class="QPushButton" name="BtnClearText">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>510</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>宋体</family>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(85, 0, 127);</string>
+    </property>
+    <property name="text">
+     <string>清除显示</string>
+    </property>
+   </widget>
+   <zorder>groupBox_PORT</zorder>
+   <zorder>groupBox_NET</zorder>
    <zorder>groupBox</zorder>
    <zorder>groupBox_2</zorder>
-   <zorder>textBrowser</zorder>
    <zorder>groupBox_COM</zorder>
-   <zorder>groupBox_NET</zorder>
    <zorder>groupBox_USB</zorder>
-   <zorder>groupBox_PORT</zorder>
-   <zorder>textBrowserFontSlider</zorder>
+   <zorder>BtnTest</zorder>
+   <zorder>textBrowser</zorder>
+   <zorder>BtnClearText</zorder>
    <zorder>textBrowserFontLabel</zorder>
+   <zorder>textBrowserFontSlider</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>677</width>
+     <width>673</width>
      <height>23</height>
     </rect>
    </property>
